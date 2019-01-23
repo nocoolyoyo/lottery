@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>龙腾简合年会抽奖</title>
+    <link rel="stylesheet" href="css/style.css?v=16" />
+</head>
+<body>
+    <!--游戏配置输入框节点-->
+    <div id="config">
+        <div class="main">
+            <button class="btn-close button">×</button>
+            <div class="input-cell">
+                <label>类型</label>
+                <select id="configType">
+                </select>
+            </div>
+            <div class="input-cell">
+                <label>人数</label>
+                <input id="configNum" type="number" required  value="1" placeholder="请输入抽奖人数"/>
+            </div>
+            <div class="input-cell">
+                <label>备注</label>
+                <input id="configRemark"  type="text" required value="补抽备注"  placeholder="请输入备注"/>
+            </div>
+            <div class="input-cell">
+                <button id="btnConfigSure" class="button button-raised button-highlight button-circle button-jumbo">确定</button>
+            </div>
+        </div>
+    </div>
+    <!--摇奖弹窗节点-->
+    <div id="roller">
+        <div class="main">
+            <h1 class="title"></h1>
+            <h2 class="award-title"></h2>
+            <button class="btn-close button">×</button>
+            <div id="gamePanel">
+                <div id="candidateBox">
+                </div>
+                <div class="right-panel">
+                    <div id="awardBox">
+                        <img  src="">
+                    </div>
+                    <div class="handler">
+                        <button  id="rollAction" class="button button-raised button-primary button-circle button-jumbo">开始</button>
+                        <button  id="rollNext"  class="button button-raised button-primary button-circle button-jumbo">下一轮</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--获奖记录弹窗节点-->
+    <div id="history" >
+        <div class="main">
+            <button class="btn-close button">×</button>
+            <div id="historyList">
+                <table id="historyTable"  border="1">
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <button id="btnExport"  class="button button-raised button-action button-circle button-jumbo">导出</button>
+        </div>
+    </div>
+    <!--工具条-->
+    <div id="handler">
+        <button id="btnShowConfig" style="display: none" class="button button-raised button-action button-circle button-jumbo">补抽</button>
+        <button id="btnShowFlow" class="button button-raised button-highlight button-circle button-jumbo">抽奖</button>
+        <button id="btnShowHistory"  class="button button-raised button-primary button-circle button-jumbo">记录</button>
+        <button id="btnResetAll" class="button button-raised button-caution button-circle button-jumbo">重置</button>
+    </div>
+    <!--结果弹窗-->
+    <div id="result">
+        <div class="main">
+            <h1 class="title"></h1>
+            <button class="btn-close button">×</button>
+            <div id="luckyDogs">
+            </div>
+        </div>
+    </div>
+    <!--遮罩节点-->
+    <div id="mask" style="display: none"></div>
+    <!--对话框-->
+    <div id="prompt">
+        <div class="main">
+            <button class="btn-close button">×</button>
+            <div id="promptMsg">
+            </div>
+            <div class="handler">
+                <button id="promptConfirm" class="button button-raised button-caution button-circle button-jumbo">确认</button>
+            </div>
+        </div>
+    </div>
+</body>
+<!--引入-->
+
+<script src="js/utils.js?v=16"></script>
+<script src="js/export.js?v=16"></script>
+<script src="js/userData.js?v=16"></script>
+<script src="js/rollFlow.js?v=16"></script>
+<!--核心代码，要review看这个文件就行-->
+<script src="js/Core.js?v=16"></script>
+<!--end -->
+<script src="js/Config.js?v=16"></script>
+<script src="js/History.js?v=16"></script>
+<script src="js/Roller.js?v=16"></script>
+<script src="js/Mask.js?v=16"></script>
+<script src="js/Prompt.js?v=16"></script>
+<script src="js/Result.js?v=16"></script>
+<script src="js/Handler.js?v=16"></script>
+<script>
+    var  lotteryVersion = '16';
+    
+    //初始化
+   var run = function () {
+       //用于发布新版本清除local用
+       var localVersion = localStorage.getItem('lotteryVersion');
+       if(lotteryVersion !== localVersion )  localStorage.clear();
+       //记录版本
+       localStorage.setItem('lotteryVersion', lotteryVersion);
+
+       Prompt.init();
+       Handler.init();
+       Roller.init();
+       History.init();
+       Result.init();
+       Config.init();
+   }
+    run();
+</script>
+</html>
